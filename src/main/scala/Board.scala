@@ -28,13 +28,13 @@ class Board {
 
 object Board {
 
-  private val start = Array.ofDim[Char](8,8)
+  private val start = Array.ofDim[Option[Piece]](8,8)
   fill_start
 
   private def fill_start: Unit = {
     for (i<-0 to 7) { for (j<-0 to 7) {
-      if (i != 1 && i != 6) { start(i)(j) = '.' }
-      else { start(i)(j) = 'P' }
+      if (i != 1 && i != 6) { start(i)(j) = None }
+      else { start(i)(j) = Some(Pawn) }
     }}
     val highPieces = Array[Char]('R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R')
     start(0) = highPieces
