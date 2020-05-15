@@ -1,6 +1,11 @@
 abstract class Piece (var x_ : Int, var y_ : Int, white: Boolean) {
   val isWhite: Boolean = white
-  val name: Char
+  val name : Char
+
+  override def toString: String = {
+    if (isWhite) name.toUpper.toString
+    else         name.toLower.toString
+  }
 
   def x: Int = x_
   def y: Int = y_
@@ -15,15 +20,17 @@ abstract class Piece (var x_ : Int, var y_ : Int, white: Boolean) {
     x_ = x_
   }
 
-  def getValid(b: Board): List[Char] = {
-    val l = List[Char]
+  def getMoves(b: Board): List[Move] = {
+    val l = List[Move]()
     for (i <- 0 to 7) {
       for (j <- 0 to 7) {
-        val m = Move()
+        val m = new Move((x,y), (i,j), b)
+        if (m.isValid) {
+          l :+ m
+        }
       }
     }
-
-
+    l
   }
-  def isValid(b: Board, move: Move)
+  //def isValid(b: Board, move: Move): Boolean
 }
